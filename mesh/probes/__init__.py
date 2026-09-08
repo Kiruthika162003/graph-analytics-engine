@@ -7,7 +7,13 @@ define them. The registry exposes all_probes(), broken(), and report().
 from __future__ import annotations
 
 # importing probe modules registers their probes as they are added
-from mesh.probes import agreements, demonstrations, invariants, structure  # noqa: F401
+from mesh.probes import (  # noqa: F401
+    agreements,
+    classes,
+    demonstrations,
+    invariants,
+    structure,
+)
 from mesh.probes.probe import Probe
 from mesh.probes.registry import all_probes, broken, register, report
 
