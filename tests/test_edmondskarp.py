@@ -54,13 +54,21 @@ class TestConservation:
         g = _classic()
         ek = EdmondsKarp(g, "s", "t")
         for u, v, cap in g.edges():
-            f = ek.flow_on(u, v)
-            assert 0 <= f <= cap
-        # every interior node passes on exactly what it receives
+            # flow_on is the net flow across an antiparallel pair, so its floor
+            # is minus the reverse capacity; a zero floor passed here only by
+            # augmentation-order luck until push-relabel broke it
+            reverse_cap = g.weight(v, u) if g.has_edge(v, u) else 0
+            assert -reverse_cap <= ek.flow_on(u, v) <= cap
+        # every interior node passes on exactly what it receives: net flow out,
+        # counting an antiparallel pair once rather than in both sums
         for node in "abcd":
-            inflow = sum(ek.flow_on(u, node) for u in g.nodes() if g.has_edge(u, node))
-            outflow = sum(ek.flow_on(node, v) for v in g.neighbors(node))
-            assert inflow == outflow
+            net_out = 0.0
+            for other in g.nodes():
+                if g.has_edge(node, other):
+                    net_out += ek.flow_on(node, other)
+                elif g.has_edge(other, node):
+                    net_out -= ek.flow_on(other, node)
+            assert net_out == 0
 
 
 class TestRefusals:

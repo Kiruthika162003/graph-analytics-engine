@@ -49,11 +49,19 @@ class TestConservation:
         g = _classic()
         d = Dinic(g, "s", "t")
         for u, v, cap in g.edges():
-            assert 0 <= d.flow_on(u, v) <= cap
+            # net flow across an antiparallel pair: the floor is minus the
+            # reverse capacity, not zero
+            reverse_cap = g.weight(v, u) if g.has_edge(v, u) else 0
+            assert -reverse_cap <= d.flow_on(u, v) <= cap
         for node in "abcd":
-            inflow = sum(d.flow_on(u, node) for u in g.nodes() if g.has_edge(u, node))
-            outflow = sum(d.flow_on(node, v) for v in g.neighbors(node))
-            assert inflow == outflow
+            # net flow out of the node, an antiparallel pair counted once
+            net_out = 0.0
+            for other in g.nodes():
+                if g.has_edge(node, other):
+                    net_out += d.flow_on(node, other)
+                elif g.has_edge(other, node):
+                    net_out -= d.flow_on(other, node)
+            assert net_out == 0
 
 
 class TestPhases:

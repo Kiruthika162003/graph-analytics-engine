@@ -98,6 +98,9 @@ class Dinic:
         return total
 
     def flow_on(self, u: str, v: str) -> float:
+        # the residual merges u->v with the reverse of v->u, so this is the NET
+        # flow across the pair and can go negative on an antiparallel edge;
+        # push-relabel exposed this where the phase order here hid it
         if not self.graph.has_edge(u, v):
             raise Missing(f"no edge from '{u}' to '{v}'")
         return self.graph.weight(u, v) - self.residual[u][v]
