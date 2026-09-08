@@ -46,6 +46,11 @@ class FloydWarshall:
         for u, v, w in graph.edges():
             self.dist[u][v] = w
             self.nxt[u][v] = v
+            if not graph.directed:
+                # edges() lists an undirected edge once; the postman test caught
+                # the reverse direction being left at infinity
+                self.dist[v][u] = w
+                self.nxt[v][u] = u
         self._run(nodes)
 
     def _run(self, nodes: list[str]) -> None:

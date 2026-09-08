@@ -44,6 +44,21 @@ class TestDistance:
             FloydWarshall(g).distance("a", "island")
 
 
+class TestUndirected:
+    def test_an_undirected_edge_is_walkable_both_ways(self):
+        # caught by the postman module: edges() lists an undirected edge once
+        # and the reverse direction was left at infinity
+        g = Graph()
+        for n in "abc":
+            g.add_node(n)
+        g.add_edge("a", "b", 2)
+        g.add_edge("b", "c", 3)
+        fw = FloydWarshall(g)
+        assert fw.distance("c", "a") == 5
+        assert fw.distance("a", "c") == 5
+        assert fw.path("c", "a") == ["c", "b", "a"]
+
+
 class TestNegativeCycle:
     def test_a_negative_cycle_is_refused(self):
         g = Graph(directed=True)
