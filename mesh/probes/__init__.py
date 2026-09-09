@@ -17,6 +17,7 @@ from mesh.probes import (  # noqa: F401
     invariants,
     readings,
     spectral,
+    streams,
     structure,
 )
 from mesh.probes.probe import Probe
