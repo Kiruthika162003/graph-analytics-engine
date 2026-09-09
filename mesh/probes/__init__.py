@@ -16,6 +16,7 @@ from mesh.probes import (  # noqa: F401
     hardness,
     invariants,
     readings,
+    rendering,
     spectral,
     streams,
     structure,
