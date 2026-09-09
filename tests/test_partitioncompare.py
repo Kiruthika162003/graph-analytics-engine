@@ -46,7 +46,17 @@ class TestAgreement:
         assert ab.rand() == ba.rand()
         assert ab.jaccard() == ba.jaccard()
         assert ab.nmi() == pytest.approx(ba.nmi())
-        assert 0 < ab.nmi() < 1
+
+    def test_crossing_halves_are_independent_and_a_partial_overlap_sits_between(self):
+        # the guess was that the natural split and the halving share some information;
+        # every cell of their joint table holds two of eight nodes, exactly the product
+        # of the marginals, so the mutual information is zero. moving one node gives
+        # the strictly-between case
+        g = _two_cliques()
+        assert PartitionCompare(g, NATURAL, HALVED).nmi() == pytest.approx(0.0, abs=1e-12)
+        partial = PartitionCompare(g, NATURAL, [list("abc"), list("dwxyz")])
+        assert 0 < partial.nmi() < 1
+        assert 0 < partial.jaccard() < 1
 
 
 class TestQuality:
