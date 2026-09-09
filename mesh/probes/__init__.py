@@ -10,6 +10,7 @@ from __future__ import annotations
 from mesh.probes import (  # noqa: F401
     agreements,
     classes,
+    counting,
     demonstrations,
     invariants,
     structure,
