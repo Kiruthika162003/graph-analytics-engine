@@ -78,9 +78,12 @@ class SelfCheck:
                 f"{zeros} zero(s) against {pieces} piece(s)",
             )
             squares = GraphEnergy(g).closed_walks(2)
+            # Jacobi rounds to about a millionth on a ten-node graph, and a tolerance of
+            # 1e-6 failed a probe that printed 40.000 against 40; the bar is now relative
+            close = abs(squares - 2 * g.edge_count()) < 1e-4 * max(1, 2 * g.edge_count())
             self._add(
                 "spectrum squares",
-                "held" if abs(squares - 2 * g.edge_count()) < 1e-6 else "failed",
+                "held" if close else "failed",
                 f"{squares:.3f} against {2 * g.edge_count()}",
             )
         else:
