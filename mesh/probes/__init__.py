@@ -14,6 +14,7 @@ from mesh.probes import (  # noqa: F401
     counting,
     demonstrations,
     hardness,
+    history,
     invariants,
     readings,
     rendering,
