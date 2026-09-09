@@ -127,5 +127,3 @@ Line length 96, ruff with the E, F, W, I, N, UP, B, A, C4, RET, SIM, ARG,
 PL, and RUF families, sparse comments, no stubs, and no em dashes anywhere.
 Every refusal names the node, edge, line, or value at fault. Modules that
 are exponential say so and state their size limit.
-
-Written by Kiruthika Subramani in collaboration with Claude, Anthropic's AI assistant.
