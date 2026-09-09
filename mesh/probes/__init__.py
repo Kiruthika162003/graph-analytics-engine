@@ -12,6 +12,7 @@ from mesh.probes import (  # noqa: F401
     classes,
     counting,
     demonstrations,
+    hardness,
     invariants,
     readings,
     spectral,
