@@ -9,6 +9,7 @@ from __future__ import annotations
 # importing probe modules registers their probes as they are added
 from mesh.probes import (  # noqa: F401
     agreements,
+    chance,
     classes,
     counting,
     demonstrations,
