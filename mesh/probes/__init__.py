@@ -13,6 +13,8 @@ from mesh.probes import (  # noqa: F401
     counting,
     demonstrations,
     invariants,
+    readings,
+    spectral,
     structure,
 )
 from mesh.probes.probe import Probe
