@@ -19,6 +19,7 @@ from mesh.probes import (  # noqa: F401
     spectral,
     streams,
     structure,
+    tooling,
 )
 from mesh.probes.probe import Probe
 from mesh.probes.registry import all_probes, broken, register, report
