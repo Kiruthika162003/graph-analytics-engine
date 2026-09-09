@@ -19,10 +19,12 @@ from mesh.probes import (  # noqa: F401
     invariants,
     readings,
     rendering,
+    reports,
     spectral,
     streams,
     structure,
     tooling,
+    walks,
 )
 from mesh.probes.probe import Probe
 from mesh.probes.registry import all_probes, broken, register, report
